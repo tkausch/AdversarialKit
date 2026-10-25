@@ -5,6 +5,7 @@
 # AdversarialKit
 
 [![Tests](https://github.com/tkausch/AdversarialKit/actions/workflows/tests.yml/badge.svg)](https://github.com/tkausch/AdversarialKit/actions/workflows/tests.yml)
+![Swift 6.0](https://img.shields.io/badge/Swift-6.0-F05138?logo=swift&logoColor=white)
 
 A small, pure-Swift toolkit for turn-based, two-player games. Describe your game as a value type, and AdversarialKit finds the best move with minimax search and alpha-beta pruning, or with Monte Carlo tree search when the game is too big to search exhaustively.
 
