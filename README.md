@@ -4,7 +4,7 @@
 
 # AdversarialKit
 
-A small, pure-Swift toolkit for turn-based, two-player games. Describe your game as a value type, and AdversarialKit finds the best move with minimax search and alpha-beta pruning.
+A small, pure-Swift toolkit for turn-based, two-player games. Describe your game as a value type, and AdversarialKit finds the best move with minimax search and alpha-beta pruning, or with Monte Carlo tree search when the game is too big to search exhaustively.
 
 - Plain Swift, no dependencies, works on any platform Swift runs on
 - Value-type game models: the search never mutates shared state
