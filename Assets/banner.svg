@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 240" width="1000" height="240" role="img" aria-label="AdversarialKit – minimax search for turn-based games in Swift">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1B1F2A"/>
+      <stop offset="1" stop-color="#2A1218"/>
+    </linearGradient>
+    <linearGradient id="ic" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F05138"/>
+      <stop offset="1" stop-color="#B3202E"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="240" rx="20" fill="url(#bg)"/>
+  <g transform="translate(60 40) scale(.8)">
+    <rect width="200" height="200" rx="44" fill="url(#ic)"/>
+    <g stroke="#fff" stroke-width="7" stroke-linecap="round" fill="none">
+      <path d="M100 52 L58 100 M100 52 L142 100 M58 100 L38 148 M58 100 L78 148 M142 100 L122 148"/>
+      <path d="M142 100 L162 148" stroke-opacity=".35" stroke-dasharray="2 12"/>
+      <path d="M148 117 L172 131"/>
+    </g>
+    <g fill="#fff">
+      <path d="M100 36 L116 62 H84 Z"/><path d="M42 90 H74 L58 116 Z"/><path d="M126 90 H158 L142 116 Z"/>
+      <circle cx="38" cy="150" r="10"/><circle cx="78" cy="150" r="10"/><circle cx="122" cy="150" r="10"/>
+    </g>
+    <circle cx="162" cy="150" r="10" fill="none" stroke="#fff" stroke-opacity=".4" stroke-width="5" stroke-dasharray="4 5"/>
+  </g>
+  <text x="256" y="120" font-family="-apple-system, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif" font-size="68" font-weight="700" fill="#fff" letter-spacing="-1">Adversarial<tspan fill="#F05138">Kit</tspan></text>
+  <text x="258" y="165" font-family="-apple-system, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif" font-size="24" fill="#B8BCC8">Minimax &amp; alpha-beta search for turn-based games, in pure Swift</text>
+</svg>

@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="Assets/banner.svg" alt="AdversarialKit" width="100%">
+</p>
+
 # AdversarialKit
 
 A small, pure-Swift toolkit for turn-based, two-player games. Describe your game as a value type, and AdversarialKit finds the best move with minimax search and alpha-beta pruning.
@@ -70,6 +74,23 @@ let strategist = MonteCarloStrategist<MyGame>(iterations: 5_000)
 let move = await strategist.bestMove(for: game)
 ```
 
+### Pitting two strategists against each other
+
+Use `Arena` to play strategists against one another, for example to see whether a change made one stronger:
+
+```swift
+let arena = Arena<TicTacToeModel>()
+let result = await arena.match(
+    MinimaxStrategist<TicTacToeModel>(),
+    against: MonteCarloStrategist<TicTacToeModel>(iterations: 1_000),
+    rounds: 20,
+    startingFrom: TicTacToeModel()
+)
+print(result.firstWins, result.secondWins, result.draws)
+```
+
+`match` alternates who moves first each round, so the first-move advantage doesn't skew the comparison. Use `playGame` directly for a single game.
+
 ## API overview
 
 | Type | Purpose |
@@ -81,6 +102,7 @@ let move = await strategist.bestMove(for: game)
 | `Strategist` | Protocol for anything that picks a move |
 | `MinimaxStrategist` | Minimax with alpha-beta pruning, optional depth limit and heuristic |
 | `MonteCarloStrategist` | Monte Carlo tree search: plays random games, needs no heuristic |
+| `Arena` | Plays two strategists against each other and tallies the results |
 | `TicTacToeModel`, `NimModel` | Ready-made games |
 
 ## Included games

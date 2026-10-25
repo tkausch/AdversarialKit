@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="AdversarialKit logo">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F05138"/>
+      <stop offset="1" stop-color="#B3202E"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="44" fill="url(#bg)"/>
+  <g stroke="#fff" stroke-width="7" stroke-linecap="round" fill="none">
+    <path d="M100 52 L58 100 M100 52 L142 100"/>
+    <path d="M58 100 L38 148 M58 100 L78 148"/>
+    <path d="M142 100 L122 148" />
+    <path d="M142 100 L162 148" stroke-opacity=".35" stroke-dasharray="2 12"/>
+  </g>
+  <!-- pruned branch marker -->
+  <path d="M148 117 L172 131" stroke="#fff" stroke-width="7" stroke-linecap="round"/>
+  <!-- max node (triangle up), min nodes (triangle down), leaves -->
+  <path d="M100 36 L116 62 H84 Z" fill="#fff"/>
+  <path d="M42 90 H74 L58 116 Z" fill="#fff"/>
+  <path d="M126 90 H158 L142 116 Z" fill="#fff"/>
+  <g fill="#fff">
+    <circle cx="38" cy="150" r="10"/>
+    <circle cx="78" cy="150" r="10"/>
+    <circle cx="122" cy="150" r="10"/>
+  </g>
+  <circle cx="162" cy="150" r="10" fill="none" stroke="#fff" stroke-opacity=".4" stroke-width="5" stroke-dasharray="4 5"/>
+</svg>
