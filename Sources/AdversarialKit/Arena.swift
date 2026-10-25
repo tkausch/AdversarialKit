@@ -60,7 +60,12 @@ public struct Arena<Model: GameModel>: Sendable {
         startingFrom model: Model
     ) async -> Model where First.Model == Model, Second.Model == Model {
         var game = model
-        while let move = await (game.activePlayer == .first ? first : second).bestMove(for: game) {
+        while !game.isTerminal {
+            let move = switch game.activePlayer {
+            case .first: await first.bestMove(for: game)
+            case .second: await second.bestMove(for: game)
+            }
+            guard let move else { break }
             game = game.applying(move)
         }
         return game

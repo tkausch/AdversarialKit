@@ -34,14 +34,15 @@ import Testing
     }
 
     @Test func alternatingStartGivesEachSideAWin() async {
-        // With perfect play from 10 stones, whoever starts wins Nim.
+        // With perfect play from 10 stones, whoever starts wins Nim, and the
+        // strategists swap who starts each round.
         let result = await arena.match(
             MinimaxStrategist<NimModel>(),
             against: MinimaxStrategist<NimModel>(),
             rounds: 2,
             startingFrom: NimModel(stones: 10)
         )
-        #expect(result.firstWins == 2)
-        #expect(result.secondWins == 0)
+        #expect(result.firstWins == 1)
+        #expect(result.secondWins == 1)
     }
 }
