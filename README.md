@@ -11,16 +11,16 @@
 
 A small, pure-Swift toolkit for turn-based, two-player games. Describe your game as a value type, and AdversarialKit finds the best move with minimax search and alpha-beta pruning, or with Monte Carlo tree search when the game is too big to search exhaustively.
 
+- Plain Swift, no dependencies, works on any platform Swift runs on
+- Value-type game models: the search never mutates shared state
+- Swift 6 ready (`Sendable` throughout)
+- Includes ready-made Tic-Tac-Toe, Nim and Hex models
+
 <p align="center">
   <img src="Assets/tictactoe-test.gif" alt="Tic-Tac-Toe test run in the terminal" width="360">
 </p>
 
 <sub>Recording of `swift test --filter TicTacToeGameplayTests`: two minimax players play Tic-Tac-Toe to a draw. [Full-quality video](https://github.com/tkausch/AdversarialKit/blob/main/Assets/tictactoe-test.mp4).</sub>
-
-- Plain Swift, no dependencies, works on any platform Swift runs on
-- Value-type game models: the search never mutates shared state
-- Swift 6 ready (`Sendable` throughout)
-- Includes ready-made Tic-Tac-Toe, Nim and Hex models
 
 ## Installation
 
