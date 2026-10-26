@@ -4,18 +4,18 @@
 
 # AdversarialKit
 
-<p align="center">
-  <img src="Assets/tictactoe-test.gif" alt="Tic-Tac-Toe test run in the terminal" width="720">
-</p>
-
-<sub>Recording of `swift test --filter TicTacToeGameplayTests`: two minimax players play Tic-Tac-Toe to a draw. [Full-quality video](https://github.com/tkausch/AdversarialKit/blob/main/Assets/tictactoe-test.mp4).</sub>
-
 [![Tests](https://github.com/tkausch/AdversarialKit/actions/workflows/tests.yml/badge.svg)](https://github.com/tkausch/AdversarialKit/actions/workflows/tests.yml)
 ![Swift 6.0](https://img.shields.io/badge/Swift-6.0-F05138?logo=swift&logoColor=white)
 ![Platforms](https://img.shields.io/badge/Apple_platforms-macOS_%7C_iOS_%7C_tvOS_%7C_watchOS_%7C_visionOS-lightgrey?logo=apple&logoColor=white)
 ![Linux](https://img.shields.io/badge/Linux-supported-FCC624?logo=linux&logoColor=black)
 
 A small, pure-Swift toolkit for turn-based, two-player games. Describe your game as a value type, and AdversarialKit finds the best move with minimax search and alpha-beta pruning, or with Monte Carlo tree search when the game is too big to search exhaustively.
+
+<p align="center">
+  <img src="Assets/tictactoe-test.gif" alt="Tic-Tac-Toe test run in the terminal" width="360">
+</p>
+
+<sub>Recording of `swift test --filter TicTacToeGameplayTests`: two minimax players play Tic-Tac-Toe to a draw. [Full-quality video](https://github.com/tkausch/AdversarialKit/blob/main/Assets/tictactoe-test.mp4).</sub>
 
 - Plain Swift, no dependencies, works on any platform Swift runs on
 - Value-type game models: the search never mutates shared state
@@ -118,7 +118,7 @@ print(result.firstWins, result.secondWins, result.draws)
 
 ## Included games
 
-`TicTacToeModel`, `NimModel` and `HexModel` are ready-made games that double as references for writing your own. Two perfect players always draw at Tic-Tac-Toe (see the test run at the top):
+`TicTacToeModel`, `NimModel` and `HexModel` are ready-made games that double as references for writing your own. Two perfect players always draw at Tic-Tac-Toe (see the test run above):
 
 ```swift
 let strategist = MinimaxStrategist<TicTacToeModel>()
