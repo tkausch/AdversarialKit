@@ -16,9 +16,7 @@ A small, pure-Swift toolkit for turn-based, two-player games. Describe your game
 - Swift 6 ready (`Sendable` throughout)
 - Includes ready-made Tic-Tac-Toe, Nim and Hex models
 
-<p align="center">
-  <img src="Assets/tictactoe-test.gif" alt="Tic-Tac-Toe test run in the terminal" width="360">
-</p>
+<img src="Assets/tictactoe-test.gif" alt="Tic-Tac-Toe test run in the terminal" width="360">
 
 <sub>Recording of `swift test --filter TicTacToeGameplayTests`: two minimax players play Tic-Tac-Toe to a draw. [Full-quality video](https://github.com/tkausch/AdversarialKit/blob/main/Assets/tictactoe-test.mp4).</sub>
 
