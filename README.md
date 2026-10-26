@@ -4,9 +4,11 @@
 
 # AdversarialKit
 
-<video src="Assets/tictactoe-test.mp4" controls muted width="100%"></video>
+<p align="center">
+  <img src="Assets/tictactoe-test.gif" alt="Tic-Tac-Toe test run in the terminal" width="720">
+</p>
 
-<sub>Recording of `swift test --filter TicTacToeGameplayTests`: two minimax players play Tic-Tac-Toe to a draw. [Open the video](https://github.com/tkausch/AdversarialKit/blob/main/Assets/tictactoe-test.mp4).</sub>
+<sub>Recording of `swift test --filter TicTacToeGameplayTests`: two minimax players play Tic-Tac-Toe to a draw. [Full-quality video](https://github.com/tkausch/AdversarialKit/blob/main/Assets/tictactoe-test.mp4).</sub>
 
 [![Tests](https://github.com/tkausch/AdversarialKit/actions/workflows/tests.yml/badge.svg)](https://github.com/tkausch/AdversarialKit/actions/workflows/tests.yml)
 ![Swift 6.0](https://img.shields.io/badge/Swift-6.0-F05138?logo=swift&logoColor=white)
@@ -116,7 +118,7 @@ print(result.firstWins, result.secondWins, result.draws)
 
 ## Included games
 
-`TicTacToeModel`, `NimModel` and `HexModel` are ready-made games that double as references for writing your own. Two perfect players always draw at Tic-Tac-Toe ([watch the test run](Assets/tictactoe-test.mp4)):
+`TicTacToeModel`, `NimModel` and `HexModel` are ready-made games that double as references for writing your own. Two perfect players always draw at Tic-Tac-Toe (see the test run at the top):
 
 ```swift
 let strategist = MinimaxStrategist<TicTacToeModel>()
