@@ -6,7 +6,7 @@
 
 <video src="Assets/tictactoe-test.mp4" controls muted width="100%"></video>
 
-<sub>Recording of `swift test --filter TicTacToeGameplayTests`: two minimax players play Tic-Tac-Toe to a draw. [Open the video](Assets/tictactoe-test.mp4).</sub>
+<sub>Recording of `swift test --filter TicTacToeGameplayTests`: two minimax players play Tic-Tac-Toe to a draw. [Open the video](https://github.com/tkausch/AdversarialKit/blob/main/Assets/tictactoe-test.mp4).</sub>
 
 [![Tests](https://github.com/tkausch/AdversarialKit/actions/workflows/tests.yml/badge.svg)](https://github.com/tkausch/AdversarialKit/actions/workflows/tests.yml)
 ![Swift 6.0](https://img.shields.io/badge/Swift-6.0-F05138?logo=swift&logoColor=white)
@@ -18,7 +18,7 @@ A small, pure-Swift toolkit for turn-based, two-player games. Describe your game
 - Plain Swift, no dependencies, works on any platform Swift runs on
 - Value-type game models: the search never mutates shared state
 - Swift 6 ready (`Sendable` throughout)
-- Includes ready-made Tic-Tac-Toe and Nim models
+- Includes ready-made Tic-Tac-Toe, Nim and Hex models
 
 ## Installation
 
@@ -112,11 +112,11 @@ print(result.firstWins, result.secondWins, result.draws)
 | `MinimaxStrategist` | Minimax with alpha-beta pruning, optional depth limit and heuristic |
 | `MonteCarloStrategist` | Monte Carlo tree search: plays random games, needs no heuristic |
 | `Arena` | Plays two strategists against each other and tallies the results |
-| `TicTacToeModel`, `NimModel` | Ready-made games |
+| `TicTacToeModel`, `NimModel`, `HexModel` | Ready-made games |
 
 ## Included games
 
-`TicTacToeModel` and `NimModel` are ready-made games that double as references for writing your own. Two perfect players always draw at Tic-Tac-Toe:
+`TicTacToeModel`, `NimModel` and `HexModel` are ready-made games that double as references for writing your own. Two perfect players always draw at Tic-Tac-Toe ([watch the test run](Assets/tictactoe-test.mp4)):
 
 ```swift
 let strategist = MinimaxStrategist<TicTacToeModel>()
@@ -132,6 +132,17 @@ In Nim, players take 1 to `maxTake` stones from a pile and whoever takes the las
 ```swift
 var game = NimModel(stones: 10, maxTake: 3)
 let move = await strategist.bestMove(for: game)   // take 2, leaving a multiple of 4
+```
+
+Hex is played on a rhombus of hexagonal cells. The first player connects the top and bottom edges, the second player the left and right edges, and a game never ends in a draw. Its branching factor is high, so `MonteCarloStrategist` suits it better than exhaustive minimax:
+
+```swift
+let strategist = MonteCarloStrategist<HexModel>(iterations: 2_000)
+var game = HexModel(size: 7)   // the default size is 11
+while let move = await strategist.bestMove(for: game) {
+    game = game.applying(move)
+}
+// game.outcome is .win(.first) or .win(.second)
 ```
 
 ## Tests
