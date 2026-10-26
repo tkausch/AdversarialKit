@@ -4,6 +4,10 @@
 
 # AdversarialKit
 
+<video src="Assets/tictactoe-test.mp4" controls muted width="100%"></video>
+
+<sub>Recording of `swift test --filter TicTacToeGameplayTests`: two minimax players play Tic-Tac-Toe to a draw. [Open the video](Assets/tictactoe-test.mp4).</sub>
+
 [![Tests](https://github.com/tkausch/AdversarialKit/actions/workflows/tests.yml/badge.svg)](https://github.com/tkausch/AdversarialKit/actions/workflows/tests.yml)
 ![Swift 6.0](https://img.shields.io/badge/Swift-6.0-F05138?logo=swift&logoColor=white)
 ![Platforms](https://img.shields.io/badge/Apple_platforms-macOS_%7C_iOS_%7C_tvOS_%7C_watchOS_%7C_visionOS-lightgrey?logo=apple&logoColor=white)
