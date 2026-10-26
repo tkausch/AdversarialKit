@@ -18,8 +18,16 @@
 ///
 /// ## Limiting the depth
 ///
-/// Most games are too large to search to the end. Set ``maxDepth`` and provide
-/// an ``evaluate`` heuristic that rates positions where the search stops:
+/// Most games are too large to search to the end. Set ``maxDepth`` and let the
+/// model rate the positions where the search stops by implementing
+/// ``GameModel/heuristicValue(for:)``:
+///
+/// ```swift
+/// let strategist = MinimaxStrategist<MyGame>(maxDepth: 6)
+/// ```
+///
+/// To override the model's heuristic, or to supply one for a model that has
+/// none, pass an ``evaluate`` closure:
 ///
 /// ```swift
 /// let strategist = MinimaxStrategist<MyGame>(maxDepth: 6) { game, player in
@@ -27,7 +35,7 @@
 /// }
 /// ```
 ///
-/// Without a heuristic, every unfinished position scores 0, so a depth-limited
+/// Without either, every unfinished position scores 0, so a depth-limited
 /// strategist can only find forced wins and losses within its horizon.
 ///
 /// ## How scores work
@@ -67,12 +75,13 @@ public struct MinimaxStrategist<Model: GameModel>: Strategist {
     /// strategist's own moves.
     public let maxDepth: Int?
 
-    /// A heuristic that rates an unfinished position when the depth limit is reached.
+    /// A heuristic that overrides ``GameModel/heuristicValue(for:)`` when the depth limit is reached.
     ///
     /// The closure receives the position and the player the score is for, and
     /// returns a higher number for a better position for that player. It is only
-    /// called when ``maxDepth`` is not `nil`.
-    public let evaluate: @Sendable (Model, ModelPlayer) -> Int
+    /// called when ``maxDepth`` is not `nil`. When it is `nil`, the model's own
+    /// heuristic is used, and 0 if the model has none.
+    public let evaluate: (@Sendable (Model, ModelPlayer) -> Int)?
 
     /// Creates a strategist.
     ///
@@ -80,10 +89,10 @@ public struct MinimaxStrategist<Model: GameModel>: Strategist {
     ///   - maxDepth: The maximum search depth in plies, or `nil` to search to
     ///     the end of the game. The default is `nil`.
     ///   - evaluate: A heuristic that rates positions at the depth limit. The
-    ///     default rates every position 0.
+    ///     default `nil` uses ``GameModel/heuristicValue(for:)``.
     public init(
         maxDepth: Int? = nil,
-        evaluate: @escaping @Sendable (Model, ModelPlayer) -> Int = { _, _ in 0 }
+        evaluate: (@Sendable (Model, ModelPlayer) -> Int)? = nil
     ) {
         self.maxDepth = maxDepth
         self.evaluate = evaluate
@@ -127,7 +136,7 @@ public struct MinimaxStrategist<Model: GameModel>: Strategist {
             case .win(let winner): return winner == root ? Self.winScore - depth : depth - Self.winScore
             }
         }
-        if let maxDepth, depth >= maxDepth { return evaluate(model, root) }
+        if let maxDepth, depth >= maxDepth { return evaluate?(model, root) ?? model.heuristicValue(for: root) ?? 0 }
 
         var alpha = alpha, beta = beta
         if model.activePlayer == root {

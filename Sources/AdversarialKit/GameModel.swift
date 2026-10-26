@@ -48,6 +48,9 @@
 /// ### Playing the Game
 /// - ``legalMoves()``
 /// - ``applying(_:)``
+///
+/// ### Guiding a Depth-Limited Search
+/// - ``heuristicValue(for:)``
 public protocol GameModel: Sendable {
     /// The type that describes a single action.
     associatedtype Move: ModelMove
@@ -87,9 +90,27 @@ public protocol GameModel: Sendable {
     ///   move is a programmer error.
     /// - Returns: A new state with `move` applied.
     func applying(_ move: Move) -> Self
+
+    /// A rating of this unfinished position for `player`, or `nil` if the model offers none.
+    ///
+    /// A depth-limited ``MinimaxStrategist`` calls this where its search stops.
+    /// Return a higher number for a position that is better for `player`, and
+    /// the negation for the opponent. Keep the magnitude well below
+    /// ``MinimaxStrategist/winScore`` so that a real win always beats a
+    /// good-looking position.
+    ///
+    /// The default implementation returns `nil`. Implement it only for games
+    /// that are too large to search to the end.
+    ///
+    /// - Parameter player: The player the rating is for.
+    /// - Complexity: This is called at the leaves of the search, so keep it cheap.
+    func heuristicValue(for player: ModelPlayer) -> Int?
 }
 
 extension GameModel {
+    /// Offers no heuristic.
+    public func heuristicValue(for player: ModelPlayer) -> Int? { nil }
+
     /// A Boolean value that indicates whether the game is over.
     ///
     /// This is `true` exactly when ``outcome`` is not `nil`.

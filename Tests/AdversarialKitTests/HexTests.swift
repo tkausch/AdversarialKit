@@ -54,4 +54,18 @@ import Testing
         _ = game.applying(.init(index: 4))
         #expect(game.board.allSatisfy { $0 == nil })
     }
+
+    @Test func heuristicIsZeroOnAnEmptyBoardAndFavorsTheLeader() {
+        let empty = HexModel(size: 5)
+        #expect(empty.heuristicValue(for: .first) == 0)
+
+        // X has three stones down column 0 and O has two on the far edge, so X leads.
+        let ahead = play(empty, [0, 4, 5, 9, 10])
+        #expect(ahead.heuristicValue(for: .first)! > 0)
+        #expect(ahead.heuristicValue(for: .second) == -ahead.heuristicValue(for: .first)!)
+    }
+
+    @Test func nimOffersNoHeuristic() {
+        #expect(NimModel(stones: 5).heuristicValue(for: .first) == nil)
+    }
 }

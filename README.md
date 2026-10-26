@@ -65,14 +65,20 @@ if let move = await strategist.bestMove(for: game) {
 
 ### 3. Limit depth for bigger games
 
-For games too large to search to the end, set a depth limit and supply a heuristic:
+For games too large to search to the end, set a depth limit and let your model rate the positions where the search stops. Implement `heuristicValue(for:)` on your `GameModel` (it returns `nil` by default, meaning no heuristic):
 
 ```swift
-let strategist = MinimaxStrategist<MyGame>(maxDepth: 6) { model, player in
-    // Rate the position for `player`; higher is better.
-    score(of: model, for: player)
+extension MyGame {
+    func heuristicValue(for player: ModelPlayer) -> Int? {
+        // Rate the position for `player`; higher is better.
+        score(of: self, for: player)
+    }
 }
+
+let strategist = MinimaxStrategist<MyGame>(maxDepth: 6)
 ```
+
+To override the model's heuristic, pass a closure: `MinimaxStrategist<MyGame>(maxDepth: 6) { model, player in ... }`. `HexModel` ships with a heuristic, so `MinimaxStrategist<HexModel>(maxDepth: 2)` works out of the box.
 
 ### Monte Carlo tree search
 

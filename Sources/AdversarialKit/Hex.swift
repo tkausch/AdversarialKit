@@ -115,6 +115,45 @@ public struct HexModel: GameModel {
     }
 }
 
+extension HexModel {
+    /// How much closer `player` is to connecting their edges than the opponent.
+    ///
+    /// Each side's distance is the number of empty cells it still has to fill
+    /// along its shortest unblocked chain between its two edges. The rating is
+    /// the opponent's distance minus the player's, so it is 0 on an empty board
+    /// and positive when `player` is ahead.
+    public func heuristicValue(for player: ModelPlayer) -> Int? {
+        distance(for: player.opponent) - distance(for: player)
+    }
+
+    private func distance(for player: ModelPlayer) -> Int {
+        let unreachable = Int.max / 2
+        var cost = Array(repeating: unreachable, count: size * size)
+        var done = Array(repeating: false, count: size * size)
+
+        func step(_ index: Int) -> Int? {
+            switch board[index] {
+            case player: 0
+            case nil: 1
+            default: nil
+            }
+        }
+
+        for i in 0..<size {
+            let start = player == .first ? i : i * size
+            if let c = step(start) { cost[start] = c }
+        }
+        while let current = cost.indices.filter({ !done[$0] && cost[$0] < unreachable }).min(by: { cost[$0] < cost[$1] }) {
+            done[current] = true
+            for next in neighbors(of: current) where !done[next] {
+                if let c = step(next), cost[current] + c < cost[next] { cost[next] = cost[current] + c }
+            }
+        }
+        let goal = (0..<size).map { player == .first ? (size - 1) * size + $0 : $0 * size + size - 1 }
+        return goal.map { cost[$0] }.min()!
+    }
+}
+
 extension HexModel: CustomStringConvertible {
     /// The board as a rhombus, with `X` for the first player, `O` for the second, and `.` for an empty cell.
     public var description: String {
